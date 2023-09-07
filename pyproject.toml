@@ -19,9 +19,61 @@ packages = [{ include = "nb_crossref" }]
 [tool.poetry.dependencies]
 python = "^3.8"
 
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.4.0"
+taskipy = "^1.12.0"
+pytest = "^7.4.1"
+pytest-cov = "^4.1.0"
+
 [tool.poetry.scripts]
 nb-crossref = "nb_crossref:nb_crossref.main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.report]
+exclude_lines = [
+    "@overload",
+    "if TYPE_CHECKING:",
+    "pragma: no cover",
+    "raise AssertionError()",
+    "return NotImplemented",
+]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = [
+    "E203", # for black
+]
+per-file-ignores = [
+    "tests/__init__.py:D104",
+    "tests/test_*.py:D100,D103,S101",
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+pretty = true
+show_error_codes = true
+strict = true
+warn_unreachable = true
+
+[tool.pytest.ini_options]
+addopts = [
+    "--cov-report=html",
+    "--cov-report=term",
+    "--cov=nb_crossref",
+    "--doctest-modules",
+]
+
+[tool.taskipy.tasks]
+prepare.cmd = "pre-commit install"
+prepare.help = "sets up the development environment"
+
+lint.cmd = "pre-commit run --all-files"
+lint.help = "runs linters (+ fix)"
+
+test.cmd  = "pytest"
+test.help = "run tests"

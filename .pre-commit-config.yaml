@@ -1,0 +1,68 @@
+default_install_hook_types: [pre-commit, commit-msg]
+
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: check-added-large-files
+    -   id: check-case-conflict
+    -   id: check-executables-have-shebangs
+    -   id: check-merge-conflict
+    -   id: check-shebang-scripts-are-executable
+    -   id: check-symlinks
+    -   id: check-toml
+    -   id: check-yaml
+    -   id: destroyed-symlinks
+    -   id: end-of-file-fixer
+    -   id: fix-byte-order-marker
+    -   id: mixed-line-ending
+    -   id: trailing-whitespace
+
+-   repo: https://github.com/psf/black
+    rev: 23.1.0
+    hooks:
+    -   id: black
+
+-   repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+    -   id: isort
+
+-   repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 2.7.1
+    hooks:
+    -   id: editorconfig-checker
+
+-   repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+    -   id: flake8
+        entry: pflake8
+        additional_dependencies:
+        -   flake8-bandit==4.1.1
+        -   flake8-bugbear==23.7.10
+        -   flake8-builtins==2.1.0
+        -   flake8-comprehensions==3.14.0
+        -   flake8-docstrings==1.7.0
+        -   flake8-pytest-style==1.7.2
+        -   pep8-naming==0.13.3
+        -   pyproject-flake8==6.0.0  # frozen for flake8 6.0.0
+
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.0.1
+    hooks:
+    -   id: mypy
+        args: []
+        additional_dependencies:
+        -   pytest==7.4.1
+
+-   repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.9.0.2
+    hooks:
+    -   id: shellcheck
+        args: [-x]
+
+-   repo: https://github.com/jorisroovers/gitlint
+    rev: v0.18.0
+    hooks:
+    -   id: gitlint

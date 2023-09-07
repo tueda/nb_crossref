@@ -11,7 +11,11 @@ T = TypeVar("T")
 
 
 def remove_duplicates(seq: Sequence[T]) -> Sequence[T]:
-    """Remove duplicates from the given sequence with preserving the order."""
+    """Remove duplicates from the given sequence with preserving the order.
+
+    >>> remove_duplicates((1, 2, 3, 1, 2, 4, 5))
+    (1, 2, 3, 4, 5)
+    """
     # See https://stackoverflow.com/a/480227
     seen: Set[T] = set()
     seen_add = seen.add
@@ -19,7 +23,11 @@ def remove_duplicates(seq: Sequence[T]) -> Sequence[T]:
 
 
 def pairwise(seq: Iterable[T]) -> Iterable[Tuple[T, T]]:
-    """Return successive overlapping pairs."""
+    """Return successive overlapping pairs.
+
+    >>> tuple(pairwise((1, 2, 3, 4, 5)))
+    ((1, 2), (2, 3), (3, 4), (4, 5))
+    """
     # See "Itertools Recipes",
     # https://docs.python.org/3.7/library/itertools.html#itertools-recipes
     a, b = itertools.tee(seq)
@@ -28,7 +36,15 @@ def pairwise(seq: Iterable[T]) -> Iterable[Tuple[T, T]]:
 
 
 def n_files_str(nfiles: int) -> str:
-    """Format `n files`."""
+    """Format `n files`.
+
+    >>> n_files_str(0)
+    'no files'
+    >>> n_files_str(1)
+    '1 file'
+    >>> n_files_str(2)
+    '2 files'
+    """
     if nfiles == 0:
         return "no files"
     elif nfiles == 1:
