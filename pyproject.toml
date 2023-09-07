@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "nb-crossref"
+version = "0.0.1a0"
+description = "Cross-referencing in Jupyter notebooks."
+authors = ["Takahiro Ueda <takahiro.ueda@yahoo.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/tueda/nb_crossref"
+keywords = ["jupyter", "notebook", "cross-reference"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Framework :: Jupyter",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Documentation",
+]
+packages = [{ include = "nb_crossref" }]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.scripts]
+nb-crossref = "nb_crossref:nb_crossref.main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,6 @@
+-   id: nb-crossref
+    name: nb-crossref
+    description: Cross-reference in Jupyter notebooks
+    entry: nb-crossref
+    language: python
+    types: [jupyter]
