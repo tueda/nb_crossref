@@ -246,10 +246,12 @@ def make_eqrefs(input_lines: Sequence[str], errors: List[str]) -> Sequence[str]:
     #   \eqref{1}
     # HTML:
     #   \tag{1}
-    #   <!-- eqref -->(1)
+    #   &NoBreak;<!-- eqref -->(1)
 
     # Note that both \tag and \eqref (and \label) are recognized by MathJax,
     # but cross reference doesn't work for different cells.
+    # "&NoBreak;" is prepended to avoid being recognized as an HTML block
+    # in GitHub Flavored Markdown when \eqref is at the beginning of a line.
 
     # Introduce special markups in the intermediate stage:
     #   {{{{TAG 1}}}}
@@ -262,7 +264,7 @@ def make_eqrefs(input_lines: Sequence[str], errors: List[str]) -> Sequence[str]:
         line = re.sub(r"\\\\eqref\{([^}]+)\}", r"{{{{EQREF \1}}}}", line)
 
         # Convert HTML back to the markups.
-        line = re.sub(r"<!-- eqref -->\(([^)]+)\)", r"{{{{EQREF \1}}}}", line)
+        line = re.sub(r"&NoBreak;<!-- eqref -->\(([^)]+)\)", r"{{{{EQREF \1}}}}", line)
 
         output_lines.append(line)
 
@@ -283,7 +285,7 @@ def make_eqrefs(input_lines: Sequence[str], errors: List[str]) -> Sequence[str]:
         )
         line = re.sub(
             r"{{{{EQREF ([^}]+)}}}}",
-            r"<!-- eqref -->(\1)",
+            r"&NoBreak;<!-- eqref -->(\1)",
             line,
         )
         output_lines.append(line)
